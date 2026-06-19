@@ -11,38 +11,43 @@ const navLinks = [
 
 const services = [
   {
-    icon: "✿",
+    num: "01",
     title: "Bukiety Okolicznościowe",
     desc: "Ręcznie komponowane bukiety na urodziny, imieniny, rocznice i każdą wyjątkową chwilę. Każdy jest jedynym w swoim rodzaju.",
     price: "od 80 zł",
+    detail: "urodziny · imieniny · rocznice",
     img: "photo-1487530811015-780780169993",
   },
   {
-    icon: "◇",
+    num: "02",
     title: "Florystyka Ślubna",
     desc: "Wiązanki ślubne, dekoracje stołów, łuki kwiatowe, chodniki — tworzymy spójną narrację kwiatową na Wasz wyjątkowy dzień.",
     price: "od 600 zł",
+    detail: "wiązanki · dekoracje stołów · łuki",
     img: "photo-1519225421980-715cb0215aed",
   },
   {
-    icon: "❀",
+    num: "03",
     title: "Wiązanki & Kosze",
     desc: "Eleganckie kompozycje w koszach wiklinowych, welurowych pudłach i papierze czerpanym. Idealne jako prezent.",
     price: "od 120 zł",
+    detail: "kosze · pudła · papier czerpany",
     img: "photo-1490750967868-88df5691cc6c",
   },
   {
-    icon: "✦",
+    num: "04",
     title: "Kwiaty na Okazje",
     desc: "Chrzciny, komunie, baby shower, pożegnania, firmowe gale — dobieramy kompozycje dopasowane do nastroju i miejsca.",
     price: "od 150 zł",
+    detail: "chrzciny · komunia · baby shower",
     img: "photo-1467043237213-65f2da53396f",
   },
   {
-    icon: "⟡",
+    num: "05",
     title: "Abonament Kwiatowy",
     desc: "Regularne dostawy świeżych kompozycji do domu lub biura — co tydzień, co dwa tygodnie lub raz w miesiącu.",
     price: "od 180 zł / mies.",
+    detail: "tygodniowy · dwutygodniowy · miesięczny",
     img: "photo-1520763185298-1b434c919102",
   },
 ];
@@ -98,315 +103,273 @@ const budzetOptions = [
 ];
 ---
 
-<Layout>
-  <!-- NAV -->
-  <header
-    id="nav"
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-  >
-    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
+<Layout
+  title="Kwiatowa Pracownia — Florystyka Autorska | Kraków"
+  description="Kwiatowa Pracownia — autorska florystyka w Krakowie. Bukiety okolicznościowe, dekoracje ślubne, wiązanki, kwiaty na każdą okazję."
+>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- NAV — thin editorial bar               -->
+  <!-- ═══════════════════════════════════════ -->
+  <header id="nav" class="fixed left-0 right-0 z-50 transition-all duration-500">
+    <div class="px-6 md:px-10 flex items-center justify-between h-14 md:h-16">
       <!-- Logo -->
-      <a href="#" class="flex flex-col leading-none group">
-        <span
-          class="font-display text-2xl text-white drop-shadow-sm tracking-wide group-hover:tracking-wider transition-all duration-300"
-          >Kwiatowa Pracownia</span
-        >
-        <span
-          class="text-[0.6rem] uppercase tracking-[0.25em] text-white/70 font-body font-light"
-          >florystyka autorska</span
-        >
+      <a href="#" class="flex items-baseline gap-3">
+        <span style="font-family:var(--font-display); font-size:1.35rem; color:var(--color-dark); letter-spacing:0.02em; line-height:1;">Kwiatowa Pracownia</span>
+        <span style="font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-rose);">Kraków</span>
       </a>
 
-      <!-- Desktop Nav -->
+      <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-8">
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-white/90 hover:text-white text-sm font-light tracking-wide link-underline transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-        <a href="#zamowienie" class="btn-outline ml-2 text-xs">Zamów bukiet</a>
+        {navLinks.map(l => (
+          <a
+            href={l.href}
+            style="font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-dark); opacity:0.55; transition:opacity 0.2s; text-decoration:none;"
+            onmouseover="this.style.opacity='1'"
+            onmouseout="this.style.opacity='0.55'"
+          >{l.label}</a>
+        ))}
       </nav>
 
+      <!-- CTA -->
+      <a href="#zamowienie" class="hidden md:inline-flex btn-ed">
+        Zamów bukiet <span style="color:var(--color-rose);">→</span>
+      </a>
+
       <!-- Burger -->
-      <button
-        id="burger"
-        class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
-        aria-label="Menu"
-      >
-        <span class="w-6 h-px bg-white block"></span>
-        <span class="w-4 h-px bg-white block"></span>
-        <span class="w-6 h-px bg-white block"></span>
+      <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <span class="block w-6 h-px bg-current" style="color:var(--color-dark);"></span>
+        <span class="block w-6 h-px bg-current" style="color:var(--color-dark);"></span>
+        <span class="block w-4 h-px bg-current" style="color:var(--color-dark);"></span>
       </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="hidden md:hidden bg-[#3a2e31] border-t border-white/10"
-    >
-      <nav class="flex flex-col px-6 py-4 gap-4">
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-white/90 hover:text-white text-base font-light tracking-wide py-1"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-        <a href="#zamowienie" class="btn-primary text-center mt-2">Zamów bukiet</a>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden" style="background:var(--color-cream); border-top:1px solid var(--color-rule);">
+      <nav class="flex flex-col px-6 py-6 gap-5">
+        {navLinks.map(l => (
+          <a
+            href={l.href}
+            style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--color-dark); text-decoration:none;"
+          >{l.label}</a>
+        ))}
+        <a href="#zamowienie" class="btn-ed mt-2 self-start">Zamów bukiet →</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section
-    id="hero"
-    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#3a2e31]"
-  >
-    <!-- Background image -->
-    <div class="absolute inset-0 z-0">
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- HERO — editorial masthead              -->
+  <!-- ═══════════════════════════════════════ -->
+  <section style="background:var(--color-cream); padding-top:calc(2.25rem + 3.5rem); min-height:100svh; display:flex; flex-direction:column; overflow:hidden; position:relative;">
+
+    <!-- Top meta strip -->
+    <div class="px-6 md:px-10 flex items-center justify-between py-3" style="border-top:1px solid var(--color-rule);">
+      <span style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:#b0a49e;">Florystyka · Kraków · od 2012</span>
+      <span style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:#b0a49e;">✿ pracownia autorska</span>
+    </div>
+
+    <!-- Main editorial grid -->
+    <div class="px-6 md:px-10 flex-1 grid grid-cols-1 md:grid-cols-12 items-end gap-0">
+
+      <!-- LEFT: giant headline -->
+      <div class="md:col-span-8 pb-8 md:pb-16 reveal">
+        <div class="mb-5 flex items-center gap-3">
+          <span style="display:block; width:2.5rem; height:1px; background:var(--color-rose);"></span>
+          <span style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-rose);">Kwiatowa Pracownia</span>
+        </div>
+
+        <h1 style="
+          font-family:var(--font-display);
+          font-weight:400;
+          font-size: clamp(5.5rem, 13vw, 14rem);
+          line-height:0.88;
+          letter-spacing:-0.01em;
+          color:var(--color-dark);
+          margin-bottom:0;
+        " class="reveal reveal-delay-1">
+          Kwiaty<br>
+          <em style="font-style:italic; color:var(--color-rose);">z duszą.</em>
+        </h1>
+      </div>
+
+      <!-- RIGHT: stacked info -->
+      <div class="md:col-span-4 md:self-center md:pl-6 pb-8 md:pb-16 reveal reveal-delay-2">
+        <div class="h-rule mb-5"></div>
+        <p style="font-family:var(--font-body); font-weight:300; font-size:0.9rem; line-height:1.85; color:#6a5a5e; max-width:28ch; margin-bottom:1.8rem;">
+          Każdy kwiat dobrany z intencją, każda kompozycja opowiada historię — dla chwil, które zostają w pamięci.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:0.8rem;">
+          <a href="#zamowienie" class="btn-ed">Zamów bukiet →</a>
+          <a href="#galeria" class="btn-ed">Zobacz realizacje →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="grid grid-cols-3" style="border-top:1px solid var(--color-rule);">
+      {[
+        { num: "850+", label: "realizacji rocznie" },
+        { num: "120+", label: "ślubów" },
+        { num: "4.9 ★", label: "ocena Google" },
+      ].map((s, i) => (
+        <div class={`px-6 md:px-10 py-4 reveal reveal-delay-${i+1}`} style={`${i < 2 ? 'border-right:1px solid var(--color-rule);' : ''}`}>
+          <div style="font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2.2rem); color:var(--color-dark); line-height:1;">{s.num}</div>
+          <div style="font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.14em; text-transform:uppercase; color:#b0a49e; margin-top:0.3rem;">{s.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Full-bleed image strip -->
+    <div class="relative overflow-hidden reveal" style="height:clamp(200px,32vw,440px);">
       <img
-        src="https://images.unsplash.com/photo-1487530811015-780780169993?auto=format&fit=crop&w=1600&q=80"
-        alt="Piękne kwiaty"
-        class="w-full h-full object-cover"
+        src="https://images.unsplash.com/photo-1490750967868-88df5691cc6c?auto=format&fit=crop&w=1800&q=85"
+        alt="Kwiatowa Pracownia — kompozycje"
+        style="width:100%; height:100%; object-fit:cover; object-position:center 55%; display:block;"
       />
-      <!-- Gradient overlay for contrast -->
-      <div
-        class="absolute inset-0"
-        style="background: linear-gradient(135deg, rgba(58,46,49,0.72) 0%, rgba(138,109,120,0.45) 50%, rgba(58,46,49,0.60) 100%);"
-      ></div>
-    </div>
-
-    <!-- Decorative floral corner SVG -->
-    <div class="absolute top-0 right-0 z-10 opacity-20 pointer-events-none select-none">
-      <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="280" cy="0" r="180" fill="none" stroke="white" stroke-width="0.5"/>
-        <circle cx="280" cy="0" r="130" fill="none" stroke="white" stroke-width="0.5"/>
-        <circle cx="280" cy="0" r="80" fill="none" stroke="white" stroke-width="0.5"/>
-      </svg>
-    </div>
-
-    <!-- Hero Content -->
-    <div class="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
-      <p
-        class="text-xs uppercase tracking-[0.4em] text-white/70 mb-6 font-light"
-        style="font-family: var(--font-body);"
-      >
-        ✿ &nbsp; Kraków, florystyka autorska &nbsp; ✿
-      </p>
-      <h1
-        class="text-5xl md:text-7xl lg:text-8xl leading-none mb-6 drop-shadow-lg"
-        style="font-family: var(--font-display);"
-      >
-        Kwiatowa<br />
-        <em class="not-italic text-[#e8c4c1]">Pracownia</em>
-      </h1>
-      <p
-        class="text-lg md:text-xl text-white/85 font-light leading-relaxed mb-10 max-w-xl mx-auto"
-        style="font-family: var(--font-body);"
-      >
-        Tworzymy bukiety z duszą — każdy kwiat dobrany z intencją,
-        każda kompozycja opowiada historię. Dla chwil, które zostają
-        w pamięci.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="#zamowienie" class="btn-primary">Zamów bukiet</a>
-        <a href="#galeria" class="btn-outline">Zobacz realizacje</a>
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div
-      class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/50"
-    >
-      <span class="text-[0.65rem] tracking-widest uppercase font-light">Przewiń</span>
-      <div class="w-px h-8 bg-white/30 animate-pulse"></div>
+      <div style="position:absolute; top:0; left:0; right:0; height:1px; background:var(--color-rose); opacity:0.3;"></div>
+      <!-- Diagonal offset label -->
+      <div style="position:absolute; bottom:1.5rem; right:2rem; font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(250,246,243,0.5);">Kraków · sezon 2025</div>
     </div>
   </section>
 
-  <!-- O PRACOWNI -->
-  <section id="o-pracowni" class="py-24 md:py-32 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-16 items-center">
-        <!-- Image column -->
-        <div class="reveal relative">
-          <div
-            class="absolute -top-4 -left-4 w-full h-full border border-[#cf9b97] rounded-sm pointer-events-none"
-          ></div>
-          <img
-            src="https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=800&q=80"
-            alt="Ania Kowalska — florystka"
-            class="w-full h-80 md:h-[480px] object-cover rounded-sm relative z-10"
-          />
-          <div
-            class="absolute -bottom-6 -right-6 bg-[#cf9b97] text-white px-6 py-4 z-20 shadow-lg"
-          >
-            <p class="text-2xl font-display leading-none">12 lat</p>
-            <p class="text-xs font-light tracking-widest uppercase mt-1">doświadczenia</p>
-          </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- O PRACOWNI — asymetryczny 2-col        -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="o-pracowni" style="background:var(--color-cream); padding:6rem 0 5rem; overflow:hidden;">
+    <div class="px-6 md:px-10">
+
+      <!-- Section header z numerem -->
+      <div class="flex items-center gap-4 mb-12 reveal">
+        <span class="section-num">01 / O Pracowni</span>
+        <div style="flex:1; height:1px; background:var(--color-rule);"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-0 items-start">
+
+        <!-- Rotated label (desktop) -->
+        <div class="hidden md:flex md:col-span-1 items-start justify-center pt-2">
+          <span style="font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-rose); writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap;">Kwiat · Pasja · Rzemiosło</span>
         </div>
 
-        <!-- Text column -->
-        <div>
-          <p class="reveal text-xs uppercase tracking-[0.3em] text-[#cf9b97] mb-4 font-light">
-            Nasza historia
-          </p>
-          <h2
-            class="reveal reveal-delay-1 text-4xl md:text-5xl leading-tight mb-6"
-            style="font-family: var(--font-display);"
-          >
-            Kwiaciarnia z sercem
+        <!-- Text block -->
+        <div class="md:col-span-5 md:col-start-2 md:pr-8 reveal reveal-delay-1">
+          <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(2.4rem,5vw,4.2rem); line-height:1.02; letter-spacing:-0.01em; color:var(--color-dark); margin-bottom:1.5rem;">
+            Kwiaciarnia<br>z sercem,<br>
+            <em style="font-style:italic; color:var(--color-rose);">z Krakowa.</em>
           </h2>
-          <div class="reveal reveal-delay-2 space-y-4 text-[#5c4a52] font-light leading-relaxed">
-            <p>
-              Kwiatowa Pracownia to miejsce, gdzie florystyka staje się sztuką.
-              Założyłam ją w 2012 roku z jednym marzeniem — by każdy bukiet
-              był gestem miłości, starannie przemyślanym i pięknie wykonanym.
-            </p>
-            <p>
-              Pracuję z kwiatami sezonowymi, dbam o ich świeżość i dobieram
-              je z lokalnych hodowli pod Krakowem. Nie tworzę anonimowych
-              wiązanek — każde zamówienie to rozmowa o Tobie, o osobie, dla
-              której to przygotowuję, o chwili, którą chcesz uczcić.
-            </p>
-            <p>
-              Moje kompozycje łączą romantyzmem z nowoczesnością — organiczne
-              kształty, pastelowa paleta, subtelne akcenty zieleni.
-            </p>
+          <div class="h-rule-rose mb-6"></div>
+          <div style="font-family:var(--font-body); font-weight:300; font-size:0.92rem; line-height:1.9; color:#6a5a5e;">
+            <p style="margin-bottom:1rem;">Kwiatowa Pracownia to miejsce, gdzie florystyka staje się sztuką. Założyłam ją w 2012 roku z jednym marzeniem — by każdy bukiet był gestem miłości, starannie przemyślanym i pięknie wykonanym.</p>
+            <p style="margin-bottom:1rem;">Pracuję z kwiatami sezonowymi, dbam o ich świeżość i dobieram je z lokalnych hodowli pod Krakowem. Nie tworzę anonimowych wiązanek — każde zamówienie to rozmowa o Tobie i chwili, którą chcesz uczcić.</p>
+            <p>Moje kompozycje łączą romantyzm z nowoczesnością — organiczne kształty, pastelowa paleta, subtelne akcenty zieleni.</p>
           </div>
-          <div class="reveal reveal-delay-3 mt-8 flex gap-10">
-            <div>
-              <p class="text-3xl text-[#8a6d78] font-display">850+</p>
-              <p class="text-xs tracking-wider uppercase font-light text-[#5c4a52]">realizacji rocznie</p>
-            </div>
-            <div>
-              <p class="text-3xl text-[#8a6d78] font-display">120+</p>
-              <p class="text-xs tracking-wider uppercase font-light text-[#5c4a52]">ślubów</p>
-            </div>
-            <div>
-              <p class="text-3xl text-[#8a6d78] font-display">4.9 ★</p>
-              <p class="text-xs tracking-wider uppercase font-light text-[#5c4a52]">ocena Google</p>
-            </div>
+
+          <!-- Signature -->
+          <div class="mt-8 pt-6 reveal reveal-delay-3" style="border-top:1px solid var(--color-rule);">
+            <p style="font-family:var(--font-display); font-style:italic; font-size:1.1rem; color:var(--color-mauve);">— Anna Kowalska, florystka & właścicielka</p>
           </div>
-          <div class="reveal reveal-delay-4 mt-8">
-            <p class="text-sm font-light text-[#8a6d78] italic font-display text-lg">
-              — Anna Kowalska, florystka & właścicielka
-            </p>
+        </div>
+
+        <!-- Image block — nachodzi na sąsiednią kolumnę -->
+        <div class="md:col-span-5 md:col-start-8 reveal reveal-delay-2" style="position:relative; margin-top:0;">
+          <div class="img-frame" style="position:relative; z-index:1;">
+            <img
+              src="https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=900&q=80"
+              alt="Anna Kowalska — florystka"
+              style="width:100%; aspect-ratio:4/5; object-fit:cover; display:block;"
+            />
+          </div>
+          <!-- Floating overlay stat -->
+          <div style="position:absolute; bottom:-1.5rem; left:-1.2rem; background:var(--color-mauve); color:var(--color-cream); padding:1.1rem 1.5rem; z-index:10;">
+            <div style="font-family:var(--font-display); font-size:1.8rem; line-height:1; color:var(--color-rose);">12 lat</div>
+            <div style="font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.16em; text-transform:uppercase; margin-top:0.3rem; opacity:0.65;">doświadczenia</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Decorative divider -->
-  <div class="petal-divider py-4">✿ &nbsp;&nbsp; ✿ &nbsp;&nbsp; ✿</div>
 
-  <!-- OFERTA -->
-  <section id="oferta" class="py-24 md:py-32 px-6 bg-[#f5eeeb]">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="reveal text-xs uppercase tracking-[0.3em] text-[#cf9b97] mb-4 font-light">Co tworzymy</p>
-        <h2
-          class="reveal reveal-delay-1 text-4xl md:text-5xl leading-tight"
-          style="font-family: var(--font-display);"
-        >
-          Oferta Pracowni
-        </h2>
+  <!-- ═══════════════════════════════════════ -->
+  <!-- OFERTA — staggered editorial layout    -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="oferta" style="background:var(--color-parchment); padding:6rem 0;">
+    <div class="px-6 md:px-10">
+
+      <!-- Section header -->
+      <div class="flex items-center gap-4 mb-4 reveal">
+        <span class="section-num">02 / Oferta</span>
+        <div style="flex:1; height:1px; background:var(--color-rule);"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          services.map((s, i) => (
-            <article
-              class={`reveal reveal-delay-${i + 1} group bg-[#faf6f3] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-400`}
-            >
-              <div class="relative overflow-hidden h-52">
-                <img
-                  src={`https://images.unsplash.com/photo-${s.img}?auto=format&fit=crop&w=700&q=80`}
-                  alt={s.title}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#3a2e31]/40 to-transparent"></div>
-                <span class="absolute top-4 right-4 text-xl text-white/80">{s.icon}</span>
+      <h2 class="reveal reveal-delay-1" style="font-family:var(--font-display); font-weight:400; font-size:clamp(2.5rem,6vw,5.2rem); line-height:1.0; letter-spacing:-0.01em; color:var(--color-dark); margin-bottom:0.5rem;">
+        Co tworzymy<br><em style="font-style:italic; color:var(--color-rose);">dla Ciebie</em>
+      </h2>
+      <p class="reveal reveal-delay-2" style="font-family:var(--font-body); font-weight:300; font-size:0.92rem; color:#8a7a7e; max-width:48ch; margin-bottom:4.5rem; line-height:1.8;">
+        Każdą kompozycję tworzymy od podstaw, dobierając kwiaty sezonowe do okazji, nastroju i Twoich upodobań.
+      </p>
+
+      <!-- Services: alternating layout, nachodzące kolumny -->
+      <div style="display:flex; flex-direction:column; gap:0;">
+        {services.map((s, i) => (
+          <div class={`reveal reveal-delay-${(i%3)+1}`} style="border-top:1px solid var(--color-rule); padding:2.5rem 0; display:grid; align-items:start; gap:2rem;" data-service-idx={i}>
+            <!-- Numer -->
+            <div style="font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.2em; color:var(--color-rose); padding-top:0.2rem; grid-column:1;">{s.num}</div>
+
+            <!-- Name + desc -->
+            <div style="grid-column:2; grid-row:1;">
+              <h3 style="font-family:var(--font-display); font-weight:400; font-size:clamp(1.5rem,3vw,2.3rem); color:var(--color-dark); margin-bottom:0.7rem; line-height:1.05;">{s.title}</h3>
+              <p style="font-family:var(--font-body); font-weight:300; font-size:0.88rem; line-height:1.8; color:#6a5a5e; max-width:52ch; margin-bottom:0.8rem;">{s.desc}</p>
+              <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+                <span style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-rose);">{s.detail}</span>
+                <span style="font-family:var(--font-display); font-size:1.05rem; color:var(--color-mauve);">{s.price}</span>
               </div>
-              <div class="p-6">
-                <h3 class="text-xl mb-2" style="font-family: var(--font-display);">
-                  {s.title}
-                </h3>
-                <p class="text-sm font-light text-[#5c4a52] leading-relaxed mb-4">{s.desc}</p>
-                <div class="flex items-center justify-between">
-                  <span class="text-[#8a6d78] font-medium text-sm">{s.price}</span>
-                  <a
-                    href="#zamowienie"
-                    class="text-xs uppercase tracking-widest text-[#cf9b97] hover:text-[#8a6d78] transition-colors font-light link-underline"
-                  >
-                    Zamów →
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))
-        }
+            </div>
+
+            <!-- Image in thin frame -->
+            <div style="grid-column:3; grid-row:1; position:relative;">
+              <img
+                src={`https://images.unsplash.com/photo-${s.img}?auto=format&fit=crop&w=600&q=80`}
+                alt={s.title}
+                style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block;"
+              />
+              <div style="position:absolute; inset:0; border:1px solid var(--color-rose); opacity:0.18; pointer-events:none;"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="reveal" style="margin-top:3rem; border-top:1px solid var(--color-rule); padding-top:2rem;">
+        <a href="#zamowienie" class="btn-ed">Zamów swoją kompozycję →</a>
       </div>
     </div>
   </section>
 
-  <!-- OPINIE -->
-  <section class="py-20 px-6" style="background: linear-gradient(135deg, var(--color-mauve) 0%, var(--color-dark) 100%);">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
-        <p class="reveal text-xs uppercase tracking-[0.3em] text-[#cf9b97] mb-4 font-light">Co mówią klientki</p>
-        <h2
-          class="reveal reveal-delay-1 text-4xl md:text-5xl leading-tight text-white"
-          style="font-family: var(--font-display);"
-        >
-          Słowa, które nas wzruszają
-        </h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        {
-          testimonials.map((t, i) => (
-            <blockquote
-              class={`reveal reveal-delay-${i + 1} bg-white/10 backdrop-blur-sm border border-white/15 p-6 rounded-sm`}
-            >
-              <p class="text-white/85 font-light text-sm leading-relaxed mb-6 italic">
-                „{t.text}"
-              </p>
-              <footer>
-                <p class="text-white font-medium text-sm">{t.name}</p>
-                <p class="text-white/50 text-xs font-light mt-0.5">{t.event}</p>
-              </footer>
-            </blockquote>
-          ))
-        }
-      </div>
-    </div>
-  </section>
 
-  <!-- GALERIA -->
-  <section id="galeria" class="py-24 md:py-32 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <p class="reveal text-xs uppercase tracking-[0.3em] text-[#cf9b97] mb-4 font-light">Nasze realizacje</p>
-        <h2
-          class="reveal reveal-delay-1 text-4xl md:text-5xl leading-tight"
-          style="font-family: var(--font-display);"
-        >
-          Galeria Kwiatów
-        </h2>
+  <!-- ═══════════════════════════════════════ -->
+  <!-- GALERIA — loose asymmetric mosaic      -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="galeria" style="background:var(--color-cream); padding:6rem 0;">
+    <div class="px-6 md:px-10">
+
+      <!-- Section header -->
+      <div class="flex items-center gap-4 mb-4 reveal">
+        <span class="section-num">03 / Galeria</span>
+        <div style="flex:1; height:1px; background:var(--color-rule);"></div>
       </div>
 
-      <!-- Filter buttons -->
-      <div class="reveal reveal-delay-2 flex flex-wrap gap-3 justify-center mb-10">
-        {
-          [
+      <div class="grid grid-cols-1 md:grid-cols-12 items-end mb-10 gap-4">
+        <div class="md:col-span-6 reveal reveal-delay-1">
+          <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(2.5rem,6vw,5rem); line-height:1.0; letter-spacing:-0.01em; color:var(--color-dark);">
+            Nasze<br><em style="font-style:italic; color:var(--color-rose);">realizacje</em>
+          </h2>
+        </div>
+        <!-- Filter buttons — editorial pill style -->
+        <div class="md:col-span-6 reveal reveal-delay-2 flex flex-wrap items-center gap-2 md:justify-end">
+          {[
             { value: "all", label: "Wszystkie" },
             { value: "bukiety", label: "Bukiety" },
             { value: "sluby", label: "Śluby" },
@@ -414,320 +377,388 @@ const budzetOptions = [
           ].map((f) => (
             <button
               data-filter={f.value}
-              class={`text-xs uppercase tracking-widest px-5 py-2 border transition-all duration-200 font-light cursor-pointer ${f.value === "all" ? "active-filter border-[#8a6d78] bg-[#8a6d78] text-white" : "border-[#cf9b97] text-[#8a6d78] hover:bg-[#cf9b97] hover:text-white hover:border-[#cf9b97]"}`}
+              style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; padding:0.35rem 0.9rem; border:1px solid var(--color-rule); color:var(--color-dark); background:transparent; cursor:pointer; transition:all 0.2s;"
+              class={f.value === "all" ? "filter-active" : "filter-btn"}
             >
               {f.label}
             </button>
-          ))
-        }
+          ))}
+        </div>
       </div>
 
-      <!-- Gallery grid -->
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {
-          galleryItems.map((item, i) => (
-            <div
-              data-category={item.cat}
-              class={`reveal reveal-delay-${(i % 5) + 1} group relative overflow-hidden aspect-square bg-[#e8ddd8]`}
-            >
-              <img
-                src={`https://images.unsplash.com/photo-${item.img}?auto=format&fit=crop&w=600&q=80`}
-                alt={item.alt}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-[#3a2e31]/0 group-hover:bg-[#3a2e31]/40 transition-all duration-300 flex items-end p-4">
-                <p class="text-white text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                  {item.alt}
-                </p>
-              </div>
-            </div>
-          ))
-        }
+      <!-- Gallery: 3-col mosaic (nachodzące rozmiary) -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4" id="gallery-grid">
+        {galleryItems.map((item, i) => (
+          <div
+            data-category={item.cat}
+            class={`reveal reveal-delay-${(i % 4)+1} gal-frame overflow-hidden`}
+            style={`aspect-ratio: ${i === 0 || i === 4 ? '3/4' : i === 2 || i === 6 ? '1/1' : '4/3'}; background:var(--color-parchment);`}
+          >
+            <img
+              src={`https://images.unsplash.com/photo-${item.img}?auto=format&fit=crop&w=700&q=80`}
+              alt={item.alt}
+              style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s cubic-bezier(.16,1,.3,1);"
+              onmouseover="this.style.transform='scale(1.04)'"
+              onmouseout="this.style.transform='scale(1)'"
+            />
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ZAMÓWIENIE FORM -->
-  <section id="zamowienie" class="py-24 md:py-32 px-6 bg-[#f5eeeb]">
-    <div class="max-w-3xl mx-auto">
-      <div class="text-center mb-12">
-        <p class="reveal text-xs uppercase tracking-[0.3em] text-[#cf9b97] mb-4 font-light">Stwórzmy razem</p>
-        <h2
-          class="reveal reveal-delay-1 text-4xl md:text-5xl leading-tight"
-          style="font-family: var(--font-display);"
-        >
-          Zamów Swój Bukiet
-        </h2>
-        <p class="reveal reveal-delay-2 text-[#5c4a52] font-light mt-4 max-w-md mx-auto">
-          Wypełnij formularz, a odezwiemy się w ciągu 24 godzin, by omówić
-          szczegóły Twojego zamówienia.
-        </p>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- OPINIE — ciemny pas z pull-quotes      -->
+  <!-- ═══════════════════════════════════════ -->
+  <section style="background:var(--color-dark); padding:6rem 0; position:relative; overflow:hidden;">
+    <!-- Rose top rule -->
+    <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--color-rose),transparent); opacity:0.3;"></div>
+
+    <div class="px-6 md:px-10">
+      <div class="flex items-center gap-4 mb-12 reveal">
+        <span style="font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-rose);">04 / Opinie</span>
+        <div style="flex:1; height:1px; background:rgba(250,246,243,0.1);"></div>
       </div>
 
-      <form
-        id="order-form"
-        class="reveal reveal-delay-2 bg-[#faf6f3] p-8 md:p-12 shadow-sm space-y-6"
-      >
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-              Imię i nazwisko *
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="Anna Nowak"
-              class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] placeholder-[#9aaa8b] transition-all duration-200"
-            />
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-              Telefon *
-            </label>
-            <input
-              type="tel"
-              required
-              placeholder="+48 500 600 700"
-              class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] placeholder-[#9aaa8b] transition-all duration-200"
-            />
-          </div>
-        </div>
+      <h2 class="reveal reveal-delay-1" style="font-family:var(--font-display); font-weight:400; font-size:clamp(2.5rem,6vw,5rem); line-height:1.0; letter-spacing:-0.01em; color:var(--color-cream); margin-bottom:4rem;">
+        Słowa,<br><em style="font-style:italic; color:var(--color-rose);">które wzruszają</em>
+      </h2>
 
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border-top:1px solid rgba(250,246,243,0.1);">
+        {testimonials.map((t, i) => (
+          <blockquote class={`reveal reveal-delay-${i+1}`} style={`padding:2.5rem 2rem 2.5rem 0; ${i < 2 ? 'border-right:1px solid rgba(250,246,243,0.1);' : ''} ${i > 0 ? 'padding-left:2rem;' : ''}`}>
+            <p style="font-family:var(--font-display); font-style:italic; font-weight:400; font-size:clamp(1rem,1.8vw,1.15rem); line-height:1.7; color:rgba(250,246,243,0.85); margin-bottom:1.5rem;">
+              &ldquo;{t.text}&rdquo;
+            </p>
+            <footer>
+              <div style="font-family:var(--font-body); font-weight:500; font-size:0.85rem; color:var(--color-cream);">{t.name}</div>
+              <div style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-rose); margin-top:0.2rem;">{t.event}</div>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+
+      <!-- Google rating -->
+      <div class="reveal" style="border-top:1px solid rgba(250,246,243,0.1); margin-top:3rem; padding-top:2rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+        <div style="font-family:var(--font-display); font-size:2.8rem; color:var(--color-cream); line-height:1;">4.9</div>
         <div>
-          <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-            E-mail *
-          </label>
-          <input
-            type="email"
-            required
-            placeholder="anna@example.com"
-            class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] placeholder-[#9aaa8b] transition-all duration-200"
-          />
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-              Okazja *
-            </label>
-            <select
-              required
-              class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] transition-all duration-200 appearance-none cursor-pointer"
-            >
-              <option value="">— wybierz —</option>
-              {okazjeOptions.map((o) => <option value={o}>{o}</option>)}
-            </select>
+          <div style="display:flex; gap:0.2rem; margin-bottom:0.3rem;">
+            {[1,2,3,4,5].map(() => (
+              <span style="color:var(--color-rose); font-size:0.85rem;">★</span>
+            ))}
           </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-              Budżet
-            </label>
-            <select
-              class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] transition-all duration-200 appearance-none cursor-pointer"
-            >
-              <option value="">— wybierz —</option>
-              {budzetOptions.map((b) => <option value={b}>{b}</option>)}
-            </select>
+          <div style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(250,246,243,0.4);">Google · 280+ recenzji</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rose bottom rule -->
+    <div style="position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--color-rose),transparent); opacity:0.3;"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ZAMÓWIENIE — editorial form            -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="zamowienie" style="background:var(--color-parchment); padding:6rem 0;">
+    <div class="px-6 md:px-10">
+
+      <div class="flex items-center gap-4 mb-4 reveal">
+        <span class="section-num">05 / Zamówienie</span>
+        <div style="flex:1; height:1px; background:var(--color-rule);"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-0 items-start">
+
+        <!-- Left: big heading + info -->
+        <div class="md:col-span-4 reveal reveal-delay-1">
+          <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(2.5rem,5.5vw,4.5rem); line-height:1.0; letter-spacing:-0.01em; color:var(--color-dark); margin-bottom:1.5rem;">
+            Stwórzmy<br>razem coś<br><em style="font-style:italic; color:var(--color-rose);">wyjątkowego</em>
+          </h2>
+          <div class="h-rule mb-5"></div>
+          <p style="font-family:var(--font-body); font-weight:300; font-size:0.88rem; line-height:1.85; color:#6a5a5e; max-width:30ch; margin-bottom:2rem;">
+            Wypełnij formularz, a odezwiemy się w ciągu 24 godzin, by omówić szczegóły Twojego zamówienia.
+          </p>
+          <!-- Delivery note -->
+          <div style="border-left:2px solid var(--color-rose); padding-left:1rem;">
+            <p style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-rose); margin-bottom:0.3rem;">Dostawy</p>
+            <p style="font-family:var(--font-body); font-weight:300; font-size:0.82rem; color:#6a5a5e; line-height:1.6;">Dowozimy na terenie Krakowa i okolic. Możliwy odbiór osobisty w pracowni przy ul. Floriańskiej 18.</p>
           </div>
         </div>
 
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-            Termin realizacji *
-          </label>
-          <input
-            type="date"
-            required
-            class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] transition-all duration-200"
-          />
+        <!-- Form -->
+        <div class="md:col-span-7 md:col-start-6 reveal reveal-delay-2">
+          <form id="order-form" style="display:flex; flex-direction:column; gap:1.8rem;" onsubmit="return false;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+              <div>
+                <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">Imię i nazwisko</label>
+                <input type="text" placeholder="Anna Nowak" class="form-input" />
+              </div>
+              <div>
+                <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">Telefon</label>
+                <input type="tel" placeholder="+48 500 600 700" class="form-input" />
+              </div>
+            </div>
+            <div>
+              <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">E-mail</label>
+              <input type="email" placeholder="anna@example.com" class="form-input" />
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+              <div>
+                <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">Okazja</label>
+                <select class="form-input">
+                  <option value="">— wybierz —</option>
+                  {okazjeOptions.map(o => <option value={o}>{o}</option>)}
+                </select>
+              </div>
+              <div>
+                <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">Budżet</label>
+                <select class="form-input">
+                  <option value="">— wybierz —</option>
+                  {budzetOptions.map(b => <option value={b}>{b}</option>)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">Termin realizacji</label>
+              <input type="date" class="form-input" />
+            </div>
+            <div>
+              <label style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:#b0a49e; display:block; margin-bottom:0.5rem;">Inspiracje / uwagi</label>
+              <textarea placeholder="Ulubione kwiaty, kolory, nastrój, do czego ma pasować..." rows="4" class="form-input" style="resize:none;"></textarea>
+            </div>
+            <div>
+              <button id="order-submit" type="submit" class="btn-ed" style="margin-top:0.3rem;">
+                Wyślij zapytanie →
+              </button>
+              <p style="font-family:var(--font-mono); font-size:0.54rem; letter-spacing:0.1em; color:#b0a49e; margin-top:0.8rem;">Odpiszemy w ciągu 24 godzin · dane są bezpieczne</p>
+            </div>
+          </form>
         </div>
-
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-[#8a6d78] mb-2 font-light">
-            Dodatkowe informacje / inspiracje
-          </label>
-          <textarea
-            rows="4"
-            placeholder="Ulubione kwiaty, kolory, nastrój, do czego ma pasować..."
-            class="w-full border border-[#e8ddd8] bg-white px-4 py-3 text-sm font-light text-[#3a2e31] placeholder-[#9aaa8b] resize-none transition-all duration-200"
-          ></textarea>
-        </div>
-
-        <button type="submit" class="btn-primary w-full text-center">
-          Wyślij zapytanie
-        </button>
-        <p class="text-xs text-center text-[#9aaa8b] font-light">
-          Odpiszemy w ciągu 24 godzin · dane są bezpieczne
-        </p>
-      </form>
+      </div>
     </div>
   </section>
 
-  <!-- KONTAKT -->
-  <section id="kontakt" class="py-24 md:py-32 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="reveal text-xs uppercase tracking-[0.3em] text-[#cf9b97] mb-4 font-light">Znajdź nas</p>
-        <h2
-          class="reveal reveal-delay-1 text-4xl md:text-5xl leading-tight"
-          style="font-family: var(--font-display);"
-        >
-          Kontakt & Dojazd
-        </h2>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- KONTAKT — split info + mapa OSM        -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="kontakt" style="background:var(--color-cream); padding:6rem 0;">
+    <div class="px-6 md:px-10">
+
+      <div class="flex items-center gap-4 mb-12 reveal">
+        <span class="section-num">06 / Kontakt</span>
+        <div style="flex:1; height:1px; background:var(--color-rule);"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Contact info -->
-        <div class="reveal space-y-8">
-          <div>
-            <h3 class="text-sm uppercase tracking-widest text-[#cf9b97] font-light mb-3">Adres</h3>
-            <p class="text-[#5c4a52] font-light">
-              ul. Floriańska 18<br />
-              31-021 Kraków<br />
-              <span class="text-xs text-[#9aaa8b]">(wejście od podwórza)</span>
-            </p>
-          </div>
-          <div>
-            <h3 class="text-sm uppercase tracking-widest text-[#cf9b97] font-light mb-3">Telefon & E-mail</h3>
-            <p class="text-[#5c4a52] font-light">
-              <a href="tel:+48123456789" class="hover:text-[#8a6d78] transition-colors link-underline">+48 123 456 789</a><br />
-              <a href="mailto:hello@kwiatowapracownia.pl" class="hover:text-[#8a6d78] transition-colors link-underline">hello@kwiatowapracownia.pl</a>
-            </p>
-          </div>
-          <div>
-            <h3 class="text-sm uppercase tracking-widest text-[#cf9b97] font-light mb-3">Godziny otwarcia</h3>
-            <div class="space-y-1 text-sm font-light text-[#5c4a52]">
-              <div class="flex justify-between max-w-xs">
-                <span>Poniedziałek – Piątek</span>
-                <span class="text-[#8a6d78]">9:00 – 18:00</span>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-0 items-start">
+
+        <!-- Contact info columns -->
+        <div class="md:col-span-4 reveal reveal-delay-1">
+          <h2 style="font-family:var(--font-display); font-weight:400; font-size:clamp(2.2rem,5vw,4rem); line-height:1.0; letter-spacing:-0.01em; color:var(--color-dark); margin-bottom:2rem;">
+            Znajdź<br><em style="font-style:italic; color:var(--color-rose);">nas</em>
+          </h2>
+
+          <div style="border-top:1px solid var(--color-rule); padding-top:1.5rem; display:flex; flex-direction:column; gap:1.4rem;">
+            {[
+              { label: "Adres", val: "ul. Floriańska 18\n31-021 Kraków\n(wejście od podwórza)" },
+              { label: "Telefon", val: "+48 123 456 789" },
+              { label: "E-mail", val: "hello@kwiatowapracownia.pl" },
+            ].map(info => (
+              <div>
+                <div style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--color-rose); margin-bottom:0.35rem;">{info.label}</div>
+                <div style="font-family:var(--font-body); font-weight:300; font-size:0.88rem; color:var(--color-dark); white-space:pre-line; line-height:1.65;">{info.val}</div>
               </div>
-              <div class="flex justify-between max-w-xs">
-                <span>Sobota</span>
-                <span class="text-[#8a6d78]">9:00 – 15:00</span>
-              </div>
-              <div class="flex justify-between max-w-xs">
-                <span>Niedziela</span>
-                <span class="text-[#9aaa8b]">nieczynne</span>
-              </div>
-            </div>
+            ))}
           </div>
-          <div>
-            <h3 class="text-sm uppercase tracking-widest text-[#cf9b97] font-light mb-3">Social media</h3>
-            <div class="flex gap-4">
-              <a
-                href="#"
-                class="w-10 h-10 border border-[#cf9b97] flex items-center justify-center text-[#cf9b97] hover:bg-[#cf9b97] hover:text-white transition-all duration-200 text-xs"
-                aria-label="Instagram"
-              >
-                IG
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 border border-[#9aaa8b] flex items-center justify-center text-[#9aaa8b] hover:bg-[#9aaa8b] hover:text-white transition-all duration-200 text-xs"
-                aria-label="Facebook"
-              >
-                FB
-              </a>
+
+          <!-- Hours -->
+          <div style="border-top:1px solid var(--color-rule); margin-top:1.5rem; padding-top:1.5rem;">
+            <div style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--color-rose); margin-bottom:0.8rem;">Godziny otwarcia</div>
+            {[
+              { day: "Pn – Pt", hours: "9:00 – 18:00" },
+              { day: "Sobota", hours: "9:00 – 15:00" },
+              { day: "Niedziela", hours: "nieczynne" },
+            ].map(h => (
+              <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; max-width:22rem;">
+                <span style="font-family:var(--font-body); font-weight:300; font-size:0.85rem; color:#6a5a5e;">{h.day}</span>
+                <span style="font-family:var(--font-body); font-weight:400; font-size:0.85rem; color:var(--color-dark);">{h.hours}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Social -->
+          <div style="border-top:1px solid var(--color-rule); margin-top:1.5rem; padding-top:1.5rem;">
+            <div style="font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--color-rose); margin-bottom:0.8rem;">Social media</div>
+            <div style="display:flex; gap:1.2rem;">
+              {["Instagram", "Facebook"].map(s => (
+                <a href="#" style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-dark); opacity:0.5; transition:opacity 0.2s; text-decoration:none;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">{s}</a>
+              ))}
             </div>
           </div>
         </div>
 
         <!-- Map -->
-        <div class="reveal reveal-delay-2">
-          <div class="w-full h-80 md:h-full min-h-64 overflow-hidden shadow-sm border border-[#e8ddd8]">
+        <div class="md:col-span-7 md:col-start-6 reveal reveal-delay-2" style="position:relative;">
+          <div style="border:1px solid var(--color-rule); overflow:hidden;">
             <iframe
               src="https://www.openstreetmap.org/export/embed.html?bbox=19.9350%2C50.0600%2C19.9500%2C50.0650&layer=mapnik&marker=50.0620%2C19.9390"
               width="100%"
-              height="100%"
-              style="border:0; min-height:320px;"
-              allowfullscreen
+              height="400"
+              style="border:none; display:block; filter:grayscale(20%) sepia(8%);"
               loading="lazy"
               title="Mapa — Kwiatowa Pracownia, Kraków"
             ></iframe>
           </div>
+          <p style="font-family:var(--font-mono); font-size:0.54rem; letter-spacing:0.12em; text-transform:uppercase; color:#b0a49e; margin-top:0.6rem;">ul. Floriańska 18, Kraków — wejście od podwórza</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer
-    class="py-12 px-6"
-    style="background: var(--color-dark);"
-  >
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- FOOTER                                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <footer style="background:var(--color-dark);">
+    <div style="height:1px; background:linear-gradient(90deg,transparent,var(--color-rose),transparent); opacity:0.3;"></div>
+
+    <div class="px-6 md:px-10 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-0 mb-10">
+
         <!-- Brand -->
-        <div class="text-center md:text-left">
-          <p class="text-2xl text-white font-display leading-none mb-1">Kwiatowa Pracownia</p>
-          <p class="text-xs uppercase tracking-widest text-white/40 font-light">florystyka autorska · Kraków</p>
+        <div class="md:col-span-4">
+          <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--color-cream); letter-spacing:0.02em; margin-bottom:0.3rem;">Kwiatowa Pracownia</div>
+          <div style="font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(207,155,151,0.4); margin-bottom:1.2rem;">florystyka autorska · Kraków</div>
+          <p style="font-family:var(--font-body); font-weight:300; font-size:0.82rem; line-height:1.7; color:rgba(250,246,243,0.35); max-width:28ch;">Każdy kwiat dobrany z intencją. Autorska florystyka od 2012 roku.</p>
         </div>
 
-        <!-- Links -->
-        <nav class="flex flex-wrap gap-x-6 gap-y-2 justify-center">
-          {
-            navLinks.map((link) => (
-              <a
-                href={link.href}
-                class="text-xs text-white/50 hover:text-white/80 transition-colors font-light tracking-wide"
-              >
-                {link.label}
-              </a>
-            ))
-          }
-        </nav>
+        <!-- Nav -->
+        <div class="md:col-span-3 md:col-start-6">
+          <h4 style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-rose); margin-bottom:1.2rem;">Menu</h4>
+          <ul style="display:flex; flex-direction:column; gap:0.6rem;">
+            {navLinks.map(l => (
+              <li>
+                <a href={l.href} style="font-family:var(--font-body); font-weight:300; font-size:0.85rem; color:rgba(250,246,243,0.32); transition:color 0.2s; text-decoration:none;" onmouseover="this.style.color='rgba(250,246,243,0.8)'" onmouseout="this.style.color='rgba(250,246,243,0.32)'">{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="md:col-span-3 md:col-start-10">
+          <h4 style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-rose); margin-bottom:1.2rem;">Oferta</h4>
+          <ul style="display:flex; flex-direction:column; gap:0.6rem;">
+            {services.map(s => (
+              <li>
+                <a href="#oferta" style="font-family:var(--font-body); font-weight:300; font-size:0.85rem; color:rgba(250,246,243,0.32); transition:color 0.2s; text-decoration:none;" onmouseover="this.style.color='rgba(250,246,243,0.8)'" onmouseout="this.style.color='rgba(250,246,243,0.32)'">{s.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div class="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-xs text-white/30 font-light">
-          © 2025 Kwiatowa Pracownia. Wszelkie prawa zastrzeżone.
+      <!-- Bottom bar -->
+      <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:1.8rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+        <p style="font-family:var(--font-mono); font-size:0.54rem; letter-spacing:0.1em; color:rgba(250,246,243,0.18);">
+          © 2025 Kwiatowa Pracownia · ul. Floriańska 18, 31-021 Kraków
         </p>
-        <p class="text-xs text-white/30 font-light text-center">
-          Przykładowa strona zrobiona przez{" "}
-          <a
-            href="https://stronainternetowa.biz"
-            target="_blank"
-            rel="noopener"
-            class="text-[#cf9b97] hover:text-[#e8c4c1] transition-colors underline underline-offset-2"
-          >
-            stronainternetowa.biz
-          </a>
-        </p>
+
+        <!-- CREDIT — obowiązkowy -->
+        <a
+          href="https://stronainternetowa.biz"
+          target="_blank"
+          rel="noopener"
+          style="font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(207,155,151,0.38); transition:color 0.2s; text-decoration:none;"
+          onmouseover="this.style.color='rgba(207,155,151,0.8)'"
+          onmouseout="this.style.color='rgba(207,155,151,0.38)'"
+        >
+          Przykładowa strona zrobiona przez <strong style="font-weight:700;">stronainternetowa.biz</strong>
+        </a>
       </div>
     </div>
   </footer>
+
 </Layout>
 
 <style>
-  /* Nav scrolled state — trap 2 from SPEC */
-  #nav.scrolled {
-    background: color-mix(in srgb, var(--color-cream) 92%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--color-line);
-    box-shadow: 0 2px 16px color-mix(in srgb, var(--color-dark) 8%, transparent);
-  }
-
-  #nav.scrolled a,
-  #nav.scrolled span,
-  #nav.scrolled button span {
-    color: var(--color-dark) !important;
-    border-color: var(--color-mauve) !important;
-  }
-
-  #nav.scrolled .btn-outline {
-    color: var(--color-mauve);
-    border-color: var(--color-mauve);
+  /* Nav scrolled state */
+  #nav {
     background: transparent;
+    border-bottom: 1px solid transparent;
   }
-  #nav.scrolled .btn-outline:hover {
-    background: var(--color-mauve);
-    color: white;
+  #nav.scrolled {
+    background: color-mix(in srgb, var(--color-cream) 95%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-rule);
   }
 
-  /* Active filter button */
-  button.active-filter {
-    background: var(--color-mauve);
-    border-color: var(--color-mauve);
-    color: white;
+  /* Gallery filter button states */
+  .filter-active {
+    background: var(--color-mauve) !important;
+    border-color: var(--color-mauve) !important;
+    color: var(--color-cream) !important;
+  }
+  .filter-btn:hover {
+    border-color: var(--color-rose);
+    color: var(--color-rose);
+  }
+
+  /* Service grid layout — responsive */
+  [data-service-idx] {
+    grid-template-columns: 2.5rem 1fr 1fr;
+  }
+  @media (max-width: 767px) {
+    [data-service-idx] {
+      grid-template-columns: 2rem 1fr !important;
+    }
+    [data-service-idx] > div:last-child {
+      grid-column: 1 / -1 !important;
+      grid-row: 2 !important;
+    }
   }
 </style>
+
+<script>
+  // Gallery filter
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const galleryItems = document.querySelectorAll<HTMLElement>("[data-category]");
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach(b => {
+        b.classList.remove("filter-active");
+        b.classList.add("filter-btn");
+      });
+      btn.classList.add("filter-active");
+      btn.classList.remove("filter-btn");
+      const filter = btn.dataset.filter;
+      galleryItems.forEach((item) => {
+        const show = filter === "all" || item.dataset.category === filter;
+        (item as HTMLElement).style.display = show ? "block" : "none";
+      });
+    });
+  });
+
+  // Form submit mock
+  const form = document.getElementById("order-form") as HTMLFormElement | null;
+  const submitBtn = document.getElementById("order-submit");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (submitBtn) {
+      const orig = submitBtn.textContent;
+      submitBtn.textContent = "Wysłano — odezwiemy się wkrótce ✿";
+      (submitBtn as HTMLButtonElement).style.color = "var(--color-sage)";
+      (submitBtn as HTMLButtonElement).style.borderColor = "var(--color-sage)";
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.textContent = orig;
+          (submitBtn as HTMLButtonElement).style.color = "";
+          (submitBtn as HTMLButtonElement).style.borderColor = "";
+          form?.reset();
+        }
+      }, 4000);
+    }
+  });
+</script>
